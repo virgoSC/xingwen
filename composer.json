@@ -1,0 +1,21 @@
+{
+    "name": "virgo/xingwen",
+    "description": "XingWen",
+    "type": "1",
+    "require": {
+        "php": ">=7.2"
+    },
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "seirios-ls",
+            "email": "237472989@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "XingWen\\": "src/XingWen"
+        }
+    }
+}
