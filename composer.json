@@ -3,7 +3,9 @@
     "description": "XingWen",
     "type": "1",
     "require": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "7.4.x-dev",
+        "ext-openssl": "*"
     },
     "license": "Apache-2.0",
     "authors": [
