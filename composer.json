@@ -5,7 +5,7 @@
     "require": {
         "php": ">=7.2",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "dev-master",
+        "guzzlehttp/guzzle": "6.*|7.*",
         "ext-openssl": "*"
     },
     "license": "Apache-2.0",

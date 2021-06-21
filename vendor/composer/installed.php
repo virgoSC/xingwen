@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'fa7a6cbfc7565c3672eb282b5180a38fbea10b58',
+    'reference' => '9849bac3f36c3fc89a7d541bb29276c623a2ef3f',
     'name' => 'virgo/xingwen',
   ),
   'versions' => 
@@ -108,7 +108,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'fa7a6cbfc7565c3672eb282b5180a38fbea10b58',
+      'reference' => '9849bac3f36c3fc89a7d541bb29276c623a2ef3f',
     ),
   ),
 );
