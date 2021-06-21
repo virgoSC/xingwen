@@ -6,20 +6,19 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'def1a2c235d96188bf6c346de0f97b80d7999e04',
+    'reference' => '9169290876deaef02fb1153c56e14bc02d2029aa',
     'name' => 'virgo/xingwen',
   ),
   'versions' => 
   array (
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => '7.0.x-dev',
+      'version' => '7.0.9999999.9999999-dev',
       'aliases' => 
       array (
-        0 => '7.4.x-dev',
       ),
-      'reference' => 'de6f1e58e735754b888649495ed4cb9ae3b19589',
+      'reference' => 'dc87640a8669b278af07f8af6d6147a0b148929c',
     ),
     'guzzlehttp/promises' => 
     array (
@@ -33,13 +32,12 @@
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => '1.x-dev',
+      'version' => '1.9999999.9999999.9999999-dev',
       'aliases' => 
       array (
-        0 => '2.0.x-dev',
       ),
-      'reference' => '148492f9e2e1524317a8aa60875f5b59517a9374',
+      'reference' => 'dc960a912984efb74d0a90222870c72c87f10c91',
     ),
     'psr/http-client' => 
     array (
@@ -52,23 +50,6 @@
       'reference' => '22b2ef5687f43679481615605d7a15c557ce85b1',
     ),
     'psr/http-client-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '1.0',
-      ),
-    ),
-    'psr/http-factory' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-        0 => '1.0.x-dev',
-      ),
-      'reference' => '36fa03d50ff82abcae81860bdaf4ed9a1510c7cd',
-    ),
-    'psr/http-factory-implementation' => 
     array (
       'provided' => 
       array (
@@ -108,7 +89,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'def1a2c235d96188bf6c346de0f97b80d7999e04',
+      'reference' => '9169290876deaef02fb1153c56e14bc02d2029aa',
     ),
   ),
 );
