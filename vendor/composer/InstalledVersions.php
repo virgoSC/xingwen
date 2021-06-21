@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '412d1229963a71fe527b31e6eb46a9b0e5791bc5',
+    'reference' => 'def1a2c235d96188bf6c346de0f97b80d7999e04',
     'name' => 'virgo/xingwen',
   ),
   'versions' => 
@@ -134,7 +134,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '412d1229963a71fe527b31e6eb46a9b0e5791bc5',
+      'reference' => 'def1a2c235d96188bf6c346de0f97b80d7999e04',
     ),
   ),
 );
@@ -317,9 +317,23 @@ return $installed[0]['root'];
 
 
 
+
 public static function getRawData()
 {
+@trigger_error('getRawData only returns the first dataset loaded, which may not be what you expect. Use getAllRawData() instead which returns all datasets for all autoloaders present in the process.', E_USER_DEPRECATED);
+
 return self::$installed;
+}
+
+
+
+
+
+
+
+public static function getAllRawData()
+{
+return self::getInstalled();
 }
 
 

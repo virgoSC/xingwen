@@ -2,10 +2,12 @@
 
 namespace XingWen;
 
+use XingWen\Http\Response;
+
 /**
  * Class XingWen
  * @package XingWen
- * @method  apply(string $bankNumber, string $carNumber, string $cusNo, string $idCard, string $idCardAddress, string $name, string $phone, string $regionCode = '60000')
+ * @method Response apply(string $loanAmount, string $bankNumber, string $carNumber, string $cusNo, string $idCard, string $idCardAddress, string $name, string $orderNo, string $phone, string $regionCode = '60000')
  * @method  fileNotify(string $batchNo, string $fileName, string $fileType)
  * @method  repayNotify(string $amount, string $cusNo, string $finishTime)
  */

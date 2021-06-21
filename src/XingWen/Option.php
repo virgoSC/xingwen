@@ -8,7 +8,11 @@ class Option
 
     protected $privateKey;
 
-    protected $productName = 'insure58';
+    protected $productName;
+
+    protected $baseUrl;
+
+    protected $regionCode;
 
     /**
      * @var Url $urlSet
@@ -17,14 +21,55 @@ class Option
 
     public function __construct(array $option)
     {
-        $this->appId = $option['appId'];
-        $this->privateKey = $option['privateKey'];
-        $this->productName = $option['productName'] ?? $this->productName;
-        $this->createUrl($option['url'] ?: array());
+        $this->appId = $option['appId'] ?? '';
+        $this->privateKey = $option['privateKey'] ?? '';
+        $this->productName = $option['productName'] ?? '';
+        $this->baseUrl = $option['baseUrl'] ?? '';
+        $this->regionCode = $option['regionCode'] ?? '';
+        $this->configUrl($option['url'] ?: array());
     }
 
+    /**
+     * @return mixed|string
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
 
-    private function createUrl(array $url)
+    /**
+     * @return mixed|string
+     */
+    public function getPrivateKey()
+    {
+        return $this->privateKey;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getProductName()
+    {
+        return $this->productName;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getRegionCode()
+    {
+        return $this->regionCode;
+    }
+
+    private function configUrl(array $url)
     {
         $this->urlSet = new Url($url);
     }

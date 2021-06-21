@@ -2,6 +2,8 @@
 
 namespace XingWen;
 
+use XingWen\Http\Request;
+
 class Routes
 {
 
@@ -22,7 +24,7 @@ class Routes
     }
 
 
-    public function apply(string $bankNumber, string $carNumber, string $cusNo, string $idCard, string $idCardAddress, string $name, string $phone, string $regionCode = '60000')
+    public function apply(string $loanAmount, string $bankNumber, string $carNumber, string $cusNo, string $idCard, string $idCardAddress, string $name, string $orderNo, string $phone, string $regionCode = '60000'): Http\Response
     {
         $param = [
             'bankNumber' => $bankNumber,
@@ -30,12 +32,20 @@ class Routes
             'cusNo' => $cusNo,
             'idCard' => $idCard,
             'idCardAddress' => $idCardAddress,
+            'loanAmount' => $loanAmount,
             'name' => $name,
+            'orderNo' => $orderNo,
             'phone' => $phone,
-            'regionCode' => $regionCode
-        ];
+            'productName' => $this->options->getProductName(),
+            'regionCode' => $regionCode ?? $this->options->getRegionCode()
 
-        $this->request();
+        ];
+        $param['appId'] = $this->options->getAppId();
+        $sign = $this->signature($param);
+
+        $param['signature'] = $sign;
+
+        return $this->request($this->urlSet->getApply(), $param, 'post');
     }
 
     public function fileNotify(string $batchNo, string $fileName, string $fileType)
@@ -48,36 +58,33 @@ class Routes
 
     }
 
-    public function request($url, $param, $method)
-    {
-
-    }
-
-    public function buildParam(array $params): string
+    private function signature(array $params): string
     {
         ksort($params);
-        $signature = "";
 
-        foreach ($params as $k => $v) {
-            $signature .= $k . "=" . $v . "&";
+        $signature = urldecode(http_build_query($params));
+
+        return $this->encrypt($signature);
+    }
+
+    private function encrypt($string): string
+    {
+        $priKey = $this->options->getPrivateKey();
+
+        if (!strpos('', '-----BEGIN RSA PRIVATE KEY-----')) {
+            $priKey = chunk_split($priKey, 64, "\n");
+            $priKey = "-----BEGIN RSA PRIVATE KEY-----\n" . $priKey . "-----END RSA PRIVATE KEY-----";
         }
 
-        return trim($signature, "&");
-    }
+        $priKeyId = openssl_pkey_get_private($priKey);
 
-    public function buildSignature(array $params)
-    {
-        $signature = $this->signature($params);
+        openssl_sign($string, $sign, $priKeyId, OPENSSL_ALGO_MD5);
 
-        return $this->getSign($signature, $this->getLoan58DefaultConfig()['private_key'] ?? null);
-    }
-
-    public function getSign($signString, $priKey)
-    {
-        $priKey = "-----BEGIN RSA PRIVATE KEY-----\n" . $priKey . "\n-----END RSA PRIVATE KEY-----";
-        $privKeyId = openssl_pkey_get_private($priKey);
-
-        openssl_sign($signString, $sign, $privKeyId, OPENSSL_ALGO_MD5);
         return base64_encode($sign);
+    }
+
+    public function request($url, $param, $method): Http\Response
+    {
+        return (new Request())->request($url, $param, 'post');
     }
 }
