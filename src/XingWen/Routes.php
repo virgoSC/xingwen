@@ -2,6 +2,7 @@
 
 namespace XingWen;
 
+use Exception;
 use XingWen\Http\Request;
 
 class Routes
@@ -16,6 +17,11 @@ class Routes
      * @var Url $urlSet
      */
     protected $urlSet;
+
+    /**
+     * @var Sftp $sftp
+     */
+    protected $sftp;
 
     public function __construct(Option $option, Url $urlSet)
     {
@@ -48,9 +54,31 @@ class Routes
         return $this->request($this->urlSet->getApply(), $param, 'post');
     }
 
-    public function fileNotify(string $batchNo, string $fileName, string $fileType)
+    /**
+     * @throws Exception
+     */
+    public function uploadFile(string $localFile, string $remoteFile): bool
     {
+        if (!$this->sftp) {
+            $this->sftpConnect();
+        }
 
+        return $this->sftp->uploadFile($localFile, $remoteFile);
+    }
+
+    public function fileNotify(string $batchNo, string $fileName, string $fileType): Http\Response
+    {
+        $param = [
+            'batchNo' => $batchNo,
+            'fileName' => $fileName,
+            'fileType' => $fileType,
+        ];
+        $param['appId'] = $this->options->getAppId();
+        $sign = $this->signature($param);
+
+        $param['signature'] = $sign;
+
+        return $this->request($this->urlSet->getApply(), $param, 'post');
     }
 
     public function repayNotify(string $amount, string $cusNo, string $finishTime)
@@ -86,5 +114,13 @@ class Routes
     public function request($url, $param, $method): Http\Response
     {
         return (new Request())->request($url, $param, 'post');
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function sftpConnect()
+    {
+        $this->sftp = new Sftp($this->options);
     }
 }
