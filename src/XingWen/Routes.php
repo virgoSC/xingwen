@@ -78,7 +78,7 @@ class Routes
 
         $param['signature'] = $sign;
 
-        return $this->request($this->urlSet->getApply(), $param, 'post');
+        return $this->request($this->urlSet->getFileNotify(), $param, 'post');
     }
 
     public function repayNotify(string $amount, string $cusNo, string $finishTime)
